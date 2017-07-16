@@ -1,19 +1,155 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Mujeres Seguras</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Shiny - Kmeans example</title>
+  <meta property='st:title' content='Kmeans example'/>
+  <link rel="shortcut icon" href="http://www.rstudio.com/wp-content/uploads/2014/04/favicon.ico"/>
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap/bootstrap.min.css"/>
+  <script src="/lib/highlight.min.js"></script>
+  <script src="/lib/jquery-1.10.2.min.js"></script>
+  <script src="/lib/bootstrap/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400" rel="stylesheet" type="text/css">
+  <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/css/global.css"/>
+  <script src="/lib/respond/respond.min.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-20375833-9', 'rstudio.com');
+    ga('require', 'linkid', 'linkid.js');
+    ga('send', 'pageview');
+  </script>
+<script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+<link rel="stylesheet" type="text/css" href="/css/rstudio.css">
+<script src="/lib/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-	<div>Aplicación de Mujeres Seguras tipo Masahup en construcción.
+  <style type="text/css">
+html, body {
+  width: 100%;
+  height: 100%;
+}
+.navbar-header {
+  padding-left: 20px;
+}
+</style>
+<script>
+$(function() {
+  if (/iPad|iPod|iPhone/.test(window.navigator.userAgent)) {
+    $(".shiny-app-frame").css({
+      "overflow-y": "scroll",
+      "-webkit-overflow-scrolling": "touch"
+    });
+  }
+});
+</script>
+<!-- swiftype -->
+<meta property='st:type' content='gallery-apps'/>
+<meta property='st:published_at' content='2014-07-29T17:28:28Z'/>  
+<meta property='st:image' content='/images/thumbnails/kmeans-example.png'/>
+
+<nav class="header navbar" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand navbar-left">
+        <a href="/">Shiny</a>
+        <span id="credits">by <a href="http://www.rstudio.com/">RStudio</a></span>
+      </div>
+    </div>
+    <form class="navbar-form navbar-left">
+      <div class="btn-group">
+        <a class="btn btn-primary btn-sm punchup" href="/gallery">Back to gallery</a>
+      </div>
+    </form>
+    <form class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+        <!-- no search for now -->
+
+      </div>
+    </form>
+    <form class="navbar-form navbar-right">
+      <div class="form-group">
+        <a class="btn btn-primary btn-sm punchup" href="https://github.com/rstudio/shiny-examples/tree/master/050-kmeans-example">Get code</a>
+        <div class="dropdown" style="display: inline-block">
+          <a class="btn btn-primary btn-sm punchup" href="#" class="dropdown-toggle" data-toggle="dropdown">Share</a>
+          <div class="dropdown-menu">
+            <div id="app-share-widgets" class="popover-content">
+            
+
+<!-- Pintrest -->
+<div class="app-share-widget">
+
+<a href="//www.pinterest.com/pin/create/button/?url=/gallery/kmeans-example.html&media=/images/thumbnails/kmeans-example.png&description=Shiny%20Gallery:%20Kmeans%20example" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
+<script type="text/javascript">
+(function(d){
+    var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+    p.type = 'text/javascript';
+    p.async = true;
+    p.src = '//assets.pinterest.com/js/pinit.js';
+    f.parentNode.insertBefore(p, f);
+}(document));
+</script>
 </div>
-	<div>div2</div>
-	<span>span1</span>
-	<div>
-		div3
-		<span>span dentr del div</span>>
-		sigue div 3
-	</div>
+
+<!-- Twitter -->
+<div class="app-share-widget">
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+
+<!-- Google Plus -->
+<div class="app-share-widget">
+<span class="g-plusone" data-size="medium"></span>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="swiftype-hidden-content" data-swiftype-index="true">
+  
+
+</div>
+
+<div class="shiny-app-frame">
+<iframe src="https://gallery.shinyapps.io/050-kmeans-example">
+</iframe>
+</div>
+
+<script>
+  $(function() {
+    // manage navbar active state
+    var loc = this.location.pathname;
+    loc = "/" + loc.split('/')[1];
+    $('a[href="' + loc + '"]').parent().addClass('active'); 
+  });
+</script>
+
 </body>
 </html>
-
